@@ -1,0 +1,10 @@
+def mostrar_menu_categorias():
+    print("\n" + "--"*30)
+    print("     GESTIÓN DE CATEGORÍAS")
+    print("__"*30)
+    print("1. Listar Categorías")
+    print("2. Registrar Nueva Categoría")
+    print("3. Editar Categoría")
+    print("4. Eliminar Categoría")
+    print("5. Volver al Menú Principal")
+    print("__"*30)

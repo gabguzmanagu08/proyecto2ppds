@@ -1,0 +1,2 @@
+1|Roberto|Vendedor
+2|ANDY|ADMINISTRADOR

@@ -1,0 +1,10 @@
+def mostrar_menu_productos():
+    print("\n" + "="*40)
+    print("     GESTIÓN DE INVENTARIO (PRODUCTOS)")
+    print("="*40)
+    print("1. Listar Productos")
+    print("2. Registrar Nuevo Producto")
+    print("3. Actualizar Precio/Stock")
+    print("4. Eliminar Producto")
+    print("5. Volver al Menú Principal")
+    print("="*40)

@@ -1,0 +1,4 @@
+1|Chocapick|5.0|10|1
+2|TV 55 4K|750.0|10|2
+3|Neverga Mabe 120ltrs|500.0|10|2
+4|AIRE SMC 24500|650.0|10|2

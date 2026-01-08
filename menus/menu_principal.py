@@ -1,0 +1,12 @@
+def mostrar_menu_principal():
+    print("-"*40)
+    print("       SISTEMA DE GESTIÓN DE TIENDA")
+    print("-"*40)
+    print("1. Gestionar Clientes")
+    print("2. Gestionar Empleados")
+    print("3. Gestionar Categorías")
+    print("4. Gestionar Productos (Inventario)")
+    print("5. REGISTRAR NUEVA VENTA")
+    print("6. Reportes de Ventas")
+    print("7. Salir")
+    print("--"*40)
