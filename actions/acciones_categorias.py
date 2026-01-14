@@ -2,6 +2,32 @@ import os
 from menus.menu_categorias import mostrar_menu_categorias
 from file_manager import FileManagerCategoria
 
+# --- FUNCIONES DE VALIDACIÓN (REUTILIZABLES) ---
+
+def leer_texto_puro(mensaje):
+    """Solicita texto y rechaza si contiene números o está vacío."""
+    while True:
+        valor = input(mensaje).strip()
+        if not valor:
+            print("[!] Error: El campo no puede estar vacío.")
+            continue
+        # Verificamos que ningún carácter sea un dígito
+        if any(char.isdigit() for char in valor):
+            print("[!] Error: No se permiten números. Ingrese solo letras para el nombre.")
+        else:
+            return valor
+
+def leer_id_valido(mensaje):
+    """Valida que el ID sea un número entero para evitar caídas del sistema."""
+    while True:
+        valor = input(mensaje).strip()
+        if valor.isdigit():
+            return int(valor)
+        else:
+            print("[!] Error: El ID debe contener solo números.")
+
+# --- MÓDULO DE CATEGORÍAS ---
+
 def ejecutar_menu_categorias():
     fm = FileManagerCategoria()
     
@@ -24,42 +50,21 @@ def ejecutar_menu_categorias():
 
         elif opcion == "2":
             print("\n--- REGISTRAR CATEGORÍA ---")
-            nombre = input("Nombre de la categoría: ").strip()
-            if nombre:
-                fm.insert(nombre)
-                print("\n[!] Categoría guardada.")
-            else:
-                print("\n[!] El nombre no puede estar vacío.")
+            # VALIDACIÓN: No permite números ni vacíos
+            nombre = leer_texto_puro("Nombre de la categoría: ")
+            
+            fm.insert(nombre)
+            print("\n[!] Categoría guardada con éxito.")
             input("Presione Enter para continuar...")
 
         elif opcion == "3":
             print("\n--- EDITAR CATEGORÍA ---")
-            id_buscado = input("ID de la categoría a editar: ")
-            if id_buscado.isdigit():
-                categorias = {c['id']: c for c in fm.get_all()}
-                id_int = int(id_buscado)
-                if id_int in categorias:
-                    nuevo_nom = input(f"Nuevo nombre [{categorias[id_int]['nombre']}]: ").strip()
-                    if nuevo_nom:
-                        # Debes tener el método 'update' en tu file_manager
-                        fm.update(id_int, nuevo_nom)
-                        print("\n[!] Categoría actualizada.")
-                    else:
-                        print("\n[!] Operación cancelada: nombre vacío.")
-                else:
-                    print("\n[!] ID no encontrado.")
-            input("Presione Enter para continuar...")
-
-        elif opcion == "4":
-            print("\n--- ELIMINAR CATEGORÍA ---")
-            id_eliminar = input("ID de la categoría a eliminar: ")
-            if id_eliminar.isdigit():
-                # Debes tener el método 'delete' en tu file_manager
-                if fm.delete(int(id_eliminar)):
-                    print("\n[!] Categoría eliminada.")
-                else:
-                    print("\n[!] El ID no existe.")
-            input("Presione Enter para continuar...")
-
-        elif opcion == "5":
-            break
+            # VALIDACIÓN: Solo números para el ID
+            id_int = leer_id_valido("ID de la categoría a editar: ")
+            
+            categorias_data = {c['id']: c for c in fm.get_all()}
+            
+            if id_int in categorias_data:
+                actual = categorias_data[id_int]
+                print(f"Editando: {actual['nombre']}")
+                print("(Presione Enter para mantener el nombre actual)")
